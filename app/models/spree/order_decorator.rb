@@ -3,7 +3,9 @@
 ]).flatten!
 
 Spree::Order.class_eval do
-  before_validation :clone_shipping_address, :if => "Spree::AddressBook::Config[:disable_bill_address]"
+  #before_validation :clone_shipping_address, :if => "Spree::AddressBook::Config[:disable_bill_address]"  
+  # @TODO redefine what Spree::AddressBook::Config settings according to UX/UI and/or move this to billing page
+  before_validation :clone_shipping_address
   
   def clone_shipping_address
     if self.ship_address

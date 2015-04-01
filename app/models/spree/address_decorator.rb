@@ -3,7 +3,12 @@
 ]).flatten!
 
 Spree::Address.class_eval do
-  belongs_to :user, :class_name => Spree.user_class.to_s
+
+  if Spree.user_class
+    belongs_to :user, class_name: Spree.user_class.to_s
+  else
+    belongs_to :user
+  end
 
   def self.required_fields
     Spree::Address.validators.map do |v|
