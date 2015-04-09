@@ -14,7 +14,7 @@ class Spree::AddressesController < Spree::StoreController
       flash[:notice] = I18n.t(:successfully_created, scope: :address_book)
       redirect_to account_path
     else
-      render :action => 'new'
+      render action: 'new'
     end
   end
 
@@ -36,7 +36,7 @@ class Spree::AddressesController < Spree::StoreController
         flash[:notice] = I18n.t(:successfully_updated, scope: :address_book)
         redirect_back_or_default(account_path)
       else
-        render :action => 'edit'
+        render action: 'edit'
       end
     else
       new_address = @address.clone
@@ -46,7 +46,7 @@ class Spree::AddressesController < Spree::StoreController
         flash[:notice] = I18n.t(:successfully_updated, scope: :address_book)
         redirect_back_or_default(account_path)
       else
-        render :action => 'edit'
+        render action: 'edit'
       end
     end
   end
@@ -59,10 +59,13 @@ class Spree::AddressesController < Spree::StoreController
   end
 
   private
+
     def address_params
       params[:address].permit(:address,
                               :firstname,
                               :lastname,
+                              :household,
+                              :address_type,
                               :address1,
                               :address2,
                               :city,
@@ -73,4 +76,3 @@ class Spree::AddressesController < Spree::StoreController
                              )
     end
 end
-

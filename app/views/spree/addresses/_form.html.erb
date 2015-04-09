@@ -10,6 +10,13 @@
     </p>
   <% elsif field == "state" && Spree::Config[:address_requires_state] %>
     <%= address_field(address_form, :state, address_id) { address_state(address_form, address.country, address_id) } %>
+  <% elsif field == 'address_type' %>
+    <p class="field" id="<%= "#{address_id}address_type" %>">
+    <%= address_form.label :address_type, Spree.t(:address_type) %><br />
+      <span id="<%= "#{address_id}address_type-selection" %>">
+      <%= address_form.select(:address_type, options_for_select(Spree::Address.address_types, address.address_type)) %>
+      </span>
+    </p>
   <% else %>
     <% next if field == "company" && !Spree::Config[:company] %>
     <% next if field == "alternative_#{address_id}_phone" && !Spree::Config["alternative_#{address_id}_phone"] %>
